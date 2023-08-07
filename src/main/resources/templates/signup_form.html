@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Moon`s Writing Class</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css"/>
+
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet"/>
+
+    <!-- Bootstrap CSS -->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
+<!--          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+
+    <style>
+    body {
+      min-height: 100vh;
+
+      background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
+      background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
+    }
+
+    .input-form {
+      max-width: 680px;
+
+      margin-top: 80px;
+      padding: 32px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+    }
+
+    </style>
+</head>
+
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="home">Writing Class</a>
+        <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAnonymous()"
+           href="/user/login">Login</a>
+        <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAuthenticated()" href="/user/logout">Logout</a>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="home#portfolio">Portfolio</a>
+                </li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                                                     href="home#about">about</a></li>
+
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="home#contact">Contact</a>
+                </li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="qa_page">Q & A</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <div class="input-form-backgroud row">
+        <div class="input-form col-md-12 mx-auto">
+            <h4 class="mb-3">SIGN UP</h4>
+            <form class="validation-form" novalidate>
+                <div class="row">
+                    <div class="mb-3">
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" id="id" placeholder="" required>
+                        <div class="invalid-feedback">
+                            ID를 입력해주세요.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="pw">Password</label>
+                        <input type="text" class="form-control" id="pw" placeholder="" value="" required>
+                        <div class="invalid-feedback">
+                            Password 를 입력해주세요
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="pwcheck">Password Check</label>
+                        <input type="text" class="form-control" id="pwcheck" placeholder="" value="" required>
+                        <div class="invalid-feedback">
+                            Password Check 를 입력해주세요
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email">이메일</label>
+                    <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                    <div class="invalid-feedback">
+                        이메일을 입력해주세요.
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+                <div class="mb-4"></div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!--<div class="container my-5">-->
+<!--    <div class="my-5 border-bottom">-->
+<!--        <div>-->
+<!--            <h4>SIGN UP</h4>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <form method="post">-->
+
+<!--        <div class="masthead-subheading font-weight-light mb-3">-->
+<!--            <label for="username" class="form-label">User ID</label>-->
+<!--            <input type="text"  class="form-control">-->
+<!--        </div>-->
+<!--        <div class="masthead-subheading font-weight-light mb-3">-->
+<!--            <label for="password1" class="form-label">Password</label>-->
+<!--            <input type="password" class="form-control">-->
+<!--        </div>-->
+<!--        <div class="masthead-subheading font-weight-light mb-3">-->
+<!--            <label for="password2" class="form-label">Password Check</label>-->
+<!--            <input type="password" class="form-control">-->
+<!--        </div>-->
+<!--        <div class="masthead-subheading font-weight-light mb-3">-->
+<!--            <label for="email" class="form-label">E-mail</label>-->
+<!--            <input type="email" class="form-control">-->
+<!--        </div>-->
+<!--        <button type="submit" class="btn btn-primary">Sign Up</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+
+</html>

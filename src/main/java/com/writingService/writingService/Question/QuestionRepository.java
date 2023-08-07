@@ -8,8 +8,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
-    @Modifying
-    @Query("update Question q set q.view = q.view + 1 where q.id = :id")
-    void updateView(@Param("id") Integer id);
+//    @Modifying
+//    @Query("update Question q set q.view = q.view + 1 where q.id = :id")
+//    void updateView(@Param("id") Integer id);
 
 }

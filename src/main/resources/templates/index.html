@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -25,6 +25,9 @@
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
+                <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAnonymous()" href="/user/login">Login</a>
+                <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAuthenticated()" href="/user/logout">Logout</a>
+                <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAnonymous()" th:href="@{/signup}">Sign Up</a>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Portfolio</a></li>
@@ -41,7 +44,7 @@
                 <!-- Masthead Avatar Image-->
                 <img class="masthead-avatar mb-5" src="assets/img/main.svg" alt="..." />
                 <!-- Masthead Heading-->
-                <h1 class="masthead-heading text-uppercase mb-0">Wrtie Your Story!</h1>
+                <h1 class="masthead-heading text-uppercase mb-0">Write Your Story!</h1>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
