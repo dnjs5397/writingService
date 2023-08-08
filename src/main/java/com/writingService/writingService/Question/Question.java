@@ -1,11 +1,13 @@
 package com.writingService.writingService.Question;
 
 
+import com.writingService.writingService.Answer.Answer;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,7 +28,10 @@ public class Question {
 
     private LocalDateTime modifyDate;
 
-    @Column(columnDefinition = "integer default 0", nullable = false)
-    private int view;
+//    @Column(columnDefinition = "integer default 0", nullable = false)
+//    private int view;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    private List<Answer> answerList;
 
 }

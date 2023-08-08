@@ -17,8 +17,5 @@ public class writingController {
         return "index";
     }
 
-    @GetMapping("qa_page")
-    public String qaPage() {
-        return "qa_page";
-    }
+
 }
