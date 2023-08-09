@@ -39,8 +39,9 @@
             Menu
             <i class="fas fa-bars"></i>
         </button>
-        <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAnonymous()" th:href="@{/user/login}">Login</a>
-        <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">Logout</a>
+        <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
+        <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+        <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAnonymous()" th:href="@{/signup}">Sign Up</a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item mx-0 mx-lg-1">
@@ -63,25 +64,66 @@
 <br/>
 <br/>
 <br/>
-<div class="container mt-5 jeju-font" style="font-weight: 500" >
+<div class="container mt-5 jeju-font">
     <table class="table">
-        <thead class="table-myColor">
+        <thead class="table-myColor align-items-center justify-content-center text-center" style="font-weight: 100">
         <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성일자</th>
+            <th style="width:10%">번호</th>
+            <th style="width:40%">제목</th>
+            <th style="width:20%">작성자</th>
+            <th style="width:30%">작성일자</th>
         </tr>
         </thead>
-        <tbody class="table-myColor">
-        <tr th:each="question, loop : ${questionList}">
-            <td th:text="${loop.count}"></td>
-            <td>
-                <a class="text-black" th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+        <tbody class="align-items-center justify-content-center text-center" style="font-weight: 500">
+        <tr th:each="question, loop : ${paging}">
+            <td class="jeju-font" th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+            <td class="text-center">
+                <a class="text-black jeju-font" th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+                <span class="jeju-font text-danger small ms-2 text-start"
+                      th:if="${#lists.size(question.answerList) > 0}"
+                      th:text="${#lists.size(question.answerList)}">
+                </span>
             </td>
-            <td class="text-black" th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <td class="text-black jeju-font"><span th:if="${question.author != null}" th:text="${question.author.username}"></span></td>
+            <td class="text-black jeju-font" th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
     </table>
+    <br>
+    <div class="jeju-font" th:if="${!paging.isEmpty()}">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link text-black "
+                   th:href="@{?page=0}">
+                    <span>처음</span>
+                </a>
+            </li>
+            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                <a class="page-link text-black "
+                   th:href="@{|?page=${paging.number-1}|}">
+                    <span>이전</span>
+                </a>
+            </li>
+            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                th:if="${page >= paging.number-2 and page <= paging.number+2}"
+                th:classappend="${page == paging.number} ? 'active'"
+                class="page-item">
+                <a th:text="${page}" class="page-link text-black " th:href="@{|?page=${page}|}"></a>
+            </li>
+            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                <a class="page-link text-black " th:href="@{|?page=${paging.number+1}|}">
+                    <span>다음</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link text-black "
+                   th:href="@{|?page=${paging.totalPages-1}|}">
+                    <span>마지막</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <a th:href="@{/question/create}" class="btn btn-primary btn-sm">질문 등록하기</a>
 </div>
 </body>
 

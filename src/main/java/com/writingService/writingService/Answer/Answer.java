@@ -1,6 +1,7 @@
 package com.writingService.writingService.Answer;
 
 import com.writingService.writingService.Question.Question;
+import com.writingService.writingService.User.UserInfo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,4 +25,7 @@ public class Answer {
 
     @ManyToOne
     private Question question;
+
+    @ManyToOne
+    private UserInfo author;
 }

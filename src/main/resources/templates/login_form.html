@@ -96,37 +96,29 @@
 <div class="container my-5">
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto jeju-font">
-            <h4 class="mb-3">SIGN UP</h4>
+            <h4 class="mb-3">Log In</h4>
             <br>
-            <form th:action="@{/signup}" th:object="${userCreateForm}" method="post">
+            <form th:action="@{/login}" method="post">
                 <div class="row">
-                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-                        <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">
+                            사용자 ID 또는 비밀번호를 확인해 주세요.
+                        </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="username" class="form-label" >ID</label>
-                        <input type="text" th:field="*{username}" class="form-control">
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label for="password1" class="form-label" >Password</label>
-                        <input type="password" th:field="*{password1}" class="form-control text-black">
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label for="password2" class="form-label" >Password Check</label>
-                        <input type="password" th:field="*{password2}" class="form-control text-black">
+                        <input type="text" name="username" id="username" class="form-control">
                     </div>
 
                     <div class="mb-3">
-                        <label for="email" class="form-label" >Email</label>
-                        <input type="email" th:field="*{email}" class="form-control" placeholder="you@example.com">
+                        <label for="password" class="form-label" >Password</label>
+                        <input type="password" name="password" id="password" class="form-control text-black">
                     </div>
 
                 </div>
 
-                <button class="btn btn-primary btn-sm btn-block" type="submit">가입 완료</button>
+                <button class="btn btn-primary btn-sm btn-block" type="submit">로그인</button>
 
             </form>
         </div>
