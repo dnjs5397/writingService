@@ -33,15 +33,25 @@ public class QuestionService {
         }
     }
     public void createQuestion(String subject, String content, UserInfo author) {
-
         Question q = new Question();
         q.setSubject(subject);
         q.setContent(content);
         q.setCreateDate(LocalDateTime.now());
         q.setAuthor(author);
         this.questionRepository.save(q);
-
     }
+
+    public void modifyQuestion(Question question, String subject, String content) {
+        question.setSubject(subject);
+        question.setContent(content);
+        question.setModifyDate(LocalDateTime.now());
+        this.questionRepository.save(question);
+    }
+
+    public void deleteQuestion(Question question) {
+        this.questionRepository.delete(question);
+    }
+
 
     public Page<Question> getList(int page) {
         List<Sort.Order> orders = new ArrayList<>();
