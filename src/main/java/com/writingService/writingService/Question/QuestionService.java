@@ -59,4 +59,9 @@ public class QuestionService {
         Pageable pageable = PageRequest.of(page, 10, Sort.by(orders));
         return this.questionRepository.findAll(pageable);
     }
+
+    public void vote(Question question, UserInfo userInfo) {
+        question.getVoter().add(userInfo);
+        this.questionRepository.save(question);
+    }
 }
