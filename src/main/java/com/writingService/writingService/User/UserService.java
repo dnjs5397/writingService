@@ -19,6 +19,7 @@ public class UserService {
         userInfo.setUsername(username);
         userInfo.setEmail(email);
         userInfo.setPassword(passwordEncoder.encode(password));
+        userInfo.setPoint(0);
         this.userRepository.save(userInfo);
         return userInfo;
     }

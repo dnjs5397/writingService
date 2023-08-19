@@ -22,4 +22,6 @@ public class UserInfo {
     @Column(unique = true)
     private String email;
 
+    private Integer point;
+
 }
