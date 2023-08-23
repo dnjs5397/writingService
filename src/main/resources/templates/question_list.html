@@ -71,7 +71,8 @@
             <th style="width:10%">번호</th>
             <th style="width:40%">제목</th>
             <th style="width:20%">작성자</th>
-            <th style="width:30%">작성일자</th>
+            <th style="width:20%">작성일자</th>
+            <th style="width:10%">조회수</th>
         </tr>
         </thead>
         <tbody class="align-items-center justify-content-center text-center" style="font-weight: 500">
@@ -86,6 +87,7 @@
             </td>
             <td class="text-black jeju-font"><span th:if="${question.author != null}" th:text="${question.author.username}"></span></td>
             <td class="text-black jeju-font" th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <td class="text-black jeju-font" th:text="${question.view}"></td>
         </tr>
         </tbody>
     </table>

@@ -30,8 +30,8 @@ public class Question {
 
     private LocalDateTime modifyDate;
 
-//    @Column(columnDefinition = "integer default 0", nullable = false)
-//    private int view;
+    @Column(columnDefinition = "integer default 0", nullable = false)
+    private int view;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
