@@ -72,23 +72,5 @@ public class QuestionService {
         this.questionRepository.save(question);
     }
 
-//    private Specification<Question> search(String kw) {
-//        return new Specification<Question>() {
-//            private static final long serialVersionUID = 1L;
-//
-//            @Override
-//            public Predicate toPredicate(Root<Question> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-//                query.distinct(true);
-//                Join<Question, UserInfo> u1 = root.join("author", JoinType.LEFT);
-//                Join<Question, Answer> a = root.join("answerList", JoinType.LEFT);
-//                Join<Answer, UserInfo> u2 = root.join("author", JoinType.LEFT);
-//                return criteriaBuilder.or(criteriaBuilder.like(root.get("subject"), "%" + kw + "%"), //제목
-//                        criteriaBuilder.like(root.get("content"), "%" + kw + "%"),      // 내용
-//                        criteriaBuilder.like(u1.get("username"), "%" + kw + "%"),    // 질문 작성자
-//                        criteriaBuilder.like(a.get("content"), "%" + kw + "%"),      // 답변 내용
-//                        criteriaBuilder.like(u2.get("username"), "%" + kw + "%"));   // 답변 작성자
-//            }
-//        };
-//    }
 }
 
