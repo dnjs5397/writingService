@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js" type="text/javascript"></script>
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <title>Moon`s Writing Class</title>
+    <!-- Favicon-->
+    <link href="assets/favicon.ico" rel="icon" type="image/x-icon"/>
+    <!-- Font Awesome icons (free version)-->
+    <script crossorigin="anonymous" src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet"/>
+    <style>
+
+        @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+        .jeju-font{
+            font-family: 'Jeju Gothic', sans-serif;
+        }
+    </style>
+</head>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<body class="jeju-font" id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/home}">Writing Class</a>
+        <button aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation" class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" data-bs-target="#navbarResponsive"
+                data-bs-toggle="collapse" type="button">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAnonymous()"
+           th:href="@{/login}">Login</a>
+        <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+        <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAnonymous()" th:href="@{/signup}">Sign
+            Up</a>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                                                     th:href="@{/home#portfolio}">Portfolio</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                                                     th:href="@{/home#about}">about</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                                                     th:href="@{/home#contact}">Class</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                                                     th:href="@{/question/list}">Q & A</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div align="center" class="container">
+    <img alt="..." height="320" src="assets/img/portfolio/kakaopay.png" width="300"/>
+    <br>
+    <br>
+    <p style="font-weight: bold">카카오페이 현재 사용가능</p>
+    <label class="box-radio-input"><input name="cp_item" type="radio" value="5000"><span>5,000원</span></label>
+    <label class="box-radio-input"><input name="cp_item" type="radio" value="10000"><span>10,000원</span></label>
+    <label class="box-radio-input"><input name="cp_item" type="radio" value="15000"><span>15,000원</span></label><br/>
+    <label class="box-radio-input"><input name="cp_item" type="radio" value="20000"><span>20,000원</span></label>
+    <label class="box-radio-input"><input name="cp_item" type="radio" value="25000"><span>25,000원</span></label>
+    <label class="box-radio-input"><input name="cp_item" type="radio" value="30000"><span>30,000원</span></label><br/>
+    <label class="box-radio-input"><input name="cp_item" type="radio" value="35000"><span>35,000원</span></label>
+    <label class="box-radio-input"><input name="cp_item" type="radio" value="40000"><span>40,000원</span></label>
+    <label class="box-radio-input"><input name="cp_item" type="radio" value="50000"><span>50,000원</span></label>
+    <p style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 5,000원이며 <br/>최대 충전금액은 50,000원 입니다.</p>
+    <button class="btn btn-outline-dark" id="charge_kakao" onclick="requestPay()" type="button">충 전 하 기</button>
+</div>
+
+</body>
+
+<script>
+
+
+        function requestPay() {
+            var IMP = window.IMP;
+            IMP.init("imp66277017");
+            IMP.request_pay({
+                pg: "kakaoplay.TC0ONETIME",
+                pay_method: "card",
+                merchant_uid: "ORD20180131-0000011",   // 주문번호
+                name: "노르웨이 회전 의자",
+                amount: 64900,                         // 숫자 타입
+                buyer_email: "gildong@gmail.com",
+                buyer_name: "홍길동",
+                buyer_tel: "010-4242-4242",
+                buyer_addr: "서울특별시 강남구 신사동",
+                buyer_postcode: "01181"
+            }, function (rsp) { // callback
+                $.ajax({
+                   type: 'GET',
+                   url: '/charge_point'
+                }).done(function(data) {
+                    if(rsp.paid_amount === data.response.amount){
+                        alert("결제 성공");
+                    } else {
+                        alert("결제 실패");
+                    }
+                });
+            });
+        }
+    </script>
+
+</html>

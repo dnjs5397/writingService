@@ -34,4 +34,10 @@ public class UserService {
         }
     }
 
+    public void pointCharge(String username, int money) {
+        Optional<UserInfo> userInfo = userRepository.findByUsername(username);
+        userInfo.get().setPoint(userInfo.get().getPoint() + money);
+        userRepository.save(userInfo.get());
+    }
+
 }

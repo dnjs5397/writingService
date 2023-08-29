@@ -1,254 +1,275 @@
 <!DOCTYPE html>
 <html lang="kr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Moon`s Writing Class</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-        <style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Moon`s Writing Class</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet"/>
+    <style>
 
         @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 
         .jeju-font{
             font-family: 'Jeju Gothic', sans-serif;
         }
-        </style>
-    </head>
 
-    <body id="page-top" class="jeju-font">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand" th:href="@{/home}">Writing Class</a>
-                <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
-                <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
-                <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAnonymous()" th:href="@{/signup}">Sign Up</a>
+    </style>
+</head>
 
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/home#portfolio}">Portfolio</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/home#about}">about</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/home#contact}">Class</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/question/list}">Q & A</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Masthead-->
-        <header class="masthead bg-primary text-black text-center">
-            <div class="container d-flex align-items-center flex-column">
-                <!-- Masthead Avatar Image-->
-                <img class="masthead-avatar mb-5" src="assets/img/main.svg" alt="..." />
-                <!-- Masthead Heading-->
-                <h1 class="masthead-heading text-uppercase mb-0">Write Your Story!</h1>
-                <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Novel Writer</p>
-            </div>
-        </header>
-        <!-- Portfolio Section-->
-        <section class="page-section portfolio" id="portfolio">
-            <div class="container">
-                <!-- Portfolio Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- Portfolio Grid Items-->
-                <div class="row justify-content-center">
-                    <!-- Portfolio Item 1-->
-                    <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                            <img class="img-fluid" src="assets/img/portfolio/cat_bus.png" alt="..." />
-                        </div>
-                    </div>
-                    <!-- Portfolio Item 2-->
-                    <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                            <img class="img-fluid" src="assets/img/portfolio/winter.png" alt="..." />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- About Section-->
-        <section class="page-section bg-primary text-black mb-1" id="about">
-            <div class="container">
-                <!-- About Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-black">About</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- About Section Content-->
-<!--                <div class="row">-->
+<body id="page-top" class="jeju-font">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/home}">Writing Class</a>
+        <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAnonymous()"
+           th:href="@{/login}">Login</a>
+        <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+        <a class="nav-link text-white py-3 px-0 px-lg-3 rounded" sec:authorize="isAnonymous()" th:href="@{/signup}">Sign
+            Up</a>
 
-                <div style="text-align : center;">
-                    <img style="border-radius: 1em;" src="assets/img/portfolio/moon.png">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <p class="lead">2013년 문화일보 신춘문예에 당선되어 작품 활동을 시작했다.<br> 2021년 심훈문학상을 수상하면서 첫 소설집 『고양이 버스』를 펴냈으며<br>2023년 『우리가 겨울을 지나온 방식』으로 제19회 세계문학상을 수상했다.</p>
-                </div>
-            </div>
-        </section>
-        <!-- Contact Section-->
-        <section class="page-section" id="contact">
-            <div class="container">
-                <!-- Contact Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Class</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-
-                <div class="row justify-content-center text-center font-jeju text-black">
-
-                    <div style="width:50% height:50%">
-                        <a th:href="@{/course/asdf}">
-                            <div class="card-image">
-                                    <img src="assets/img/portfolio/class1.svg" style="display:inline">
-                            </div>
-                            <div class="card-content text-black">
-                                <div class="course_title">소설 1회 첨삭 이용권</div>
-                                <div class="price">₩49,000</div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div style="width:50% height:50%">
-                        <a th:href="@{/course/asdf}">
-                            <div class="card-image">
-                                    <img src="assets/img/portfolio/class2.svg" style="display:inline">
-                            </div>
-                            <div class="card-content text-black">
-                                <div class="course_title">소설 클래스 정규수업반(1 Month)</div>
-                                <div class="price">₩199,000</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Copyright Section-->
-        <div class="copyright py-4 text-center text-white">
-            <div class="container"><small>Copyright &copy; Dev_Seungwon</small></div>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                                                     th:href="@{/home#portfolio}">Portfolio</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                                                     th:href="@{/home#about}">about</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                                                     th:href="@{/home#contact}">Class</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                                                     th:href="@{/question/list}">Q & A</a></li>
+            </ul>
         </div>
-        <!-- Portfolio Modals-->
-        <!-- Portfolio Modal 1-->
-        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                    <div class="modal-body text-center pb-5">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">고양이 버스</h2>
-                                    <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
-                                    <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cat_bus.png" alt="..." />
-                                    <!-- Portfolio Modal - Text-->
-                                    <p class="mb-4">2013년 문화일보 신춘문예에 단편소설 「고양이 버스」가 당선되어 작품활동을 시작한 문미순 작가의 첫 번째 소설집이다. "주제의식을 집요하게 파고드는 소설 작법이 인상적이라는"(박범신, 김원우 소설가) 평을 받은 소설 「고양이 버스」를 비롯하여 모두 6편의 작품이 실려 있다. 소외당하고 외면당하는 변두리의 삶을 다루면서 내재한 고통과 상처, 의지와 자존을 미적 거리를 확보하면서 구체적인 언어로 서술하고 있다.</p>
-                                    <button class="btn btn-primary" data-bs-dismiss="modal">
-                                        <i class="fas fa-xmark fa-fw"></i>
-                                        닫기
-                                    </button>
-                                    <button class="btn btn-primary" type="button" onclick="window.open('https://www.yes24.com/Product/Goods/104205867')">
-                                        <i class="fas fa-mark fa-fw"></i>
-                                        도서 정보
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+    </div>
+</nav>
+<!-- Masthead-->
+<header class="masthead bg-primary text-black text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Avatar Image-->
+        <img class="masthead-avatar mb-5" src="assets/img/main.svg" alt="..."/>
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">Write Your Story!</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Masthead Subheading-->
+        <p class="masthead-subheading font-weight-light mb-0">Novel Writer</p>
+    </div>
+</header>
+<!-- Portfolio Section-->
+<section class="page-section portfolio" id="portfolio">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Portfolio Grid Items-->
+        <div class="row justify-content-center">
+            <!-- Portfolio Item 1-->
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i
+                                class="fas fa-plus fa-3x"></i></div>
                     </div>
+                    <img class="img-fluid" src="assets/img/portfolio/cat_bus.png" alt="..."/>
+                </div>
+            </div>
+            <!-- Portfolio Item 2-->
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i
+                                class="fas fa-plus fa-3x"></i></div>
+                    </div>
+                    <img class="img-fluid" src="assets/img/portfolio/winter.png" alt="..."/>
                 </div>
             </div>
         </div>
-        <!-- Portfolio Modal 2-->
-        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                    <div class="modal-body text-center pb-5">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">우리가 겨울을 지나온 방식</h2>
-                                    <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
-                                    <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/winter.png" alt="..." />
-                                    <!-- Portfolio Modal - Text-->
-                                    <p class="mb-4">185편의 응모작 가운데 심사위원의 압도적인 지지로 당선된 이 작품은, 간병과 돌봄의 무게를 홀로 감당하는 두 주인공이 벼랑 끝에 내몰린 현실에서도 삶을 포기하지 않고 희망의 빛을 찾아가는 잔혹하고도 따뜻한 이야기다. 치매 어머니를 간병하는 50대 여성 명주와 뇌졸중 아버지를 돌보는 20대 청년 준성은 잇따르는 불운과 가혹한 현실에 좌절하던 중 예기치 못한 부모의 죽음에 직면하자 그 죽음을 은폐, 유예한다. 막다른 길에서 그들이 감행하는 결단과 선택의 과정을 작가는 입체적이고 치밀하게 그리며 설득력 있는 서사를 만들어낸다.</p>
-                                    <button class="btn btn-primary" data-bs-dismiss="modal">
-                                        <i class="fas fa-xmark fa-fw"></i>
-                                        닫기
-                                    </button>
-                                    <button class="btn btn-primary" type="button" onclick="window.open('https://www.yes24.com/Product/Goods/118785110')">
-                                        <i class="fas fa-mark fa-fw"></i>
-                                        도서 정보
-                                    </button>
-                                </div>
+    </div>
+</section>
+<!-- About Section-->
+<section class="page-section bg-primary text-black mb-1" id="about">
+    <div class="container">
+        <!-- About Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-black">About</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- About Section Content-->
+        <!--                <div class="row">-->
+
+        <div style="text-align : center;">
+            <img style="border-radius: 1em;" src="assets/img/portfolio/moon.png">
+            <br>
+            <br>
+            <br>
+            <br>
+            <p class="lead">2013년 문화일보 신춘문예에 당선되어 작품 활동을 시작했다.<br> 2021년 심훈문학상을 수상하면서 첫 소설집 『고양이 버스』를 펴냈으며<br>2023년 『우리가
+                겨울을 지나온 방식』으로 제19회 세계문학상을 수상했다.</p>
+        </div>
+    </div>
+</section>
+<!-- Contact Section-->
+<section class="page-section" id="contact">
+    <div class="container">
+        <!-- Contact Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Class</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+
+        <div class="row justify-content-center text-center font-jeju text-black">
+
+            <div class="col-md-3 col-lg-2 mb-3">
+                <a th:href="@{/course/asdf1}">
+                    <img width="150" height="150" src="assets/img/portfolio/class1.svg">
+                    <div class="course_title">소설 첨삭 이용권(1회)</div>
+                    <div class="price">₩49,000</div>
+                </a>
+            </div>
+
+            <div class="col-md-3 col-lg-2 mb-3">
+                <a th:href="@{/course/asdf2}">
+                    <img width="150" height="150" src="assets/img/portfolio/class2.svg">
+                    <div class="course_title">소설 정규수업반(1 Month)</div>
+                    <div class="price">₩199,000</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Copyright Section-->
+<div class="copyright py-4 text-center text-white">
+    <div class="container"><small>Copyright &copy; Dev_Seungwon</small></div>
+</div>
+<!-- Portfolio Modals-->
+<!-- Portfolio Modal 1-->
+<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">고양이 버스</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
                             </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cat_bus.png" alt="..."/>
+                            <!-- Portfolio Modal - Text-->
+                            <p class="mb-4">2013년 문화일보 신춘문예에 단편소설 「고양이 버스」가 당선되어 작품활동을 시작한 문미순 작가의 첫 번째 소설집이다. "주제의식을
+                                집요하게 파고드는 소설 작법이 인상적이라는"(박범신, 김원우 소설가) 평을 받은 소설 「고양이 버스」를 비롯하여 모두 6편의 작품이 실려 있다. 소외당하고
+                                외면당하는 변두리의 삶을 다루면서 내재한 고통과 상처, 의지와 자존을 미적 거리를 확보하면서 구체적인 언어로 서술하고 있다.</p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                닫기
+                            </button>
+                            <button class="btn btn-primary" type="button"
+                                    onclick="window.open('https://www.yes24.com/Product/Goods/104205867')">
+                                <i class="fas fa-mark fa-fw"></i>
+                                도서 정보
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<!-- Portfolio Modal 2-->
+<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">우리가 겨울을 지나온 방식</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/winter.png" alt="..."/>
+                            <!-- Portfolio Modal - Text-->
+                            <p class="mb-4">185편의 응모작 가운데 심사위원의 압도적인 지지로 당선된 이 작품은, 간병과 돌봄의 무게를 홀로 감당하는 두 주인공이 벼랑 끝에 내몰린
+                                현실에서도 삶을 포기하지 않고 희망의 빛을 찾아가는 잔혹하고도 따뜻한 이야기다. 치매 어머니를 간병하는 50대 여성 명주와 뇌졸중 아버지를 돌보는 20대 청년
+                                준성은 잇따르는 불운과 가혹한 현실에 좌절하던 중 예기치 못한 부모의 죽음에 직면하자 그 죽음을 은폐, 유예한다. 막다른 길에서 그들이 감행하는 결단과 선택의
+                                과정을 작가는 입체적이고 치밀하게 그리며 설득력 있는 서사를 만들어낸다.</p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                닫기
+                            </button>
+                            <button class="btn btn-primary" type="button"
+                                    onclick="window.open('https://www.yes24.com/Product/Goods/118785110')">
+                                <i class="fas fa-mark fa-fw"></i>
+                                도서 정보
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    </body>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+
 </html>

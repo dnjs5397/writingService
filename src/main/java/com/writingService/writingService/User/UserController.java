@@ -3,6 +3,7 @@ package com.writingService.writingService.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,6 +40,20 @@ public class UserController {
     @GetMapping("/login")
     public String login() {
         return "login_form";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/pointCharge")
+    public String point_charge() {
+        return "point_charge";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/charge_point")
+    public String Cash(int amount, @AuthenticationPrincipal Principal principal){
+        UserInfo userinfo = userService.getUser(principal.getName());
+        userService.pointCharge(userinfo.getUsername(), amount);
+        return "redirect:/";
     }
 
 }
