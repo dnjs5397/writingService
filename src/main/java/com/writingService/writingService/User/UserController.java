@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 
@@ -50,10 +51,9 @@ public class UserController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/charge_point")
-    public String Cash(int amount, @AuthenticationPrincipal Principal principal){
+    public @ResponseBody void Cash(int amount, Principal principal){
         UserInfo userinfo = userService.getUser(principal.getName());
         userService.pointCharge(userinfo.getUsername(), amount);
-        return "redirect:/";
     }
 
 }

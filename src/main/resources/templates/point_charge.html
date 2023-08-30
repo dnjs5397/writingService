@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kr" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js" type="text/javascript"></script>
 <head>
@@ -25,6 +25,7 @@
         .jeju-font{
             font-family: 'Jeju Gothic', sans-serif;
         }
+
     </style>
 </head>
 <br>
@@ -39,7 +40,9 @@
     <div class="container">
         <a class="navbar-brand" th:href="@{/home}">Writing Class</a>
         <button aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation" class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" data-bs-target="#navbarResponsive"
+                aria-label="Toggle navigation"
+                class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded"
+                data-bs-target="#navbarResponsive"
                 data-bs-toggle="collapse" type="button">
             Menu
             <i class="fas fa-bars"></i>
@@ -81,40 +84,54 @@
     <label class="box-radio-input"><input name="cp_item" type="radio" value="50000"><span>50,000원</span></label>
     <p style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 5,000원이며 <br/>최대 충전금액은 50,000원 입니다.</p>
     <button class="btn btn-outline-dark" id="charge_kakao" onclick="requestPay()" type="button">충 전 하 기</button>
+    <button class="btn btn-outline-dark" id="howmuch" onclick="how()" type="button">얼마</button>
 </div>
 
 </body>
 
 <script>
 
+    var IMP = window.IMP;
+    IMP.init("imp66277017");
 
-        function requestPay() {
-            var IMP = window.IMP;
-            IMP.init("imp66277017");
-            IMP.request_pay({
-                pg: "kakaoplay.TC0ONETIME",
-                pay_method: "card",
-                merchant_uid: "ORD20180131-0000011",   // 주문번호
-                name: "노르웨이 회전 의자",
-                amount: 64900,                         // 숫자 타입
-                buyer_email: "gildong@gmail.com",
-                buyer_name: "홍길동",
-                buyer_tel: "010-4242-4242",
-                buyer_addr: "서울특별시 강남구 신사동",
-                buyer_postcode: "01181"
-            }, function (rsp) { // callback
+    function requestPay() {
+
+        IMP.request_pay({
+            pg: "kakaopay.TC0ONETIME",
+            pay_method: "card",
+            merchant_uid: "O11-000051",   // 주문번호
+            name: "포인트 충전",
+            amount: 49000,                         // 숫자 타입
+            buyer_email: "gildong@gmail.com",
+            buyer_name: "홍길동",
+            buyer_tel: "010-4242-4242",
+            buyer_addr: "서울특별시 강남구 신사동",
+            buyer_postcode: "01181"
+        }, function (rsp) {
+
+            console.log(rsp);
+            if (rsp.success) {
+                var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
                 $.ajax({
-                   type: 'GET',
-                   url: '/charge_point'
-                }).done(function(data) {
-                    if(rsp.paid_amount === data.response.amount){
-                        alert("결제 성공");
-                    } else {
-                        alert("결제 실패");
-                    }
+                    type: "GET",
+                    url: "/charge_point", //충전 금액값을 보낼 url 설정
+                    data: {
+                        "amount" : 49000
+                    },
                 });
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+                }
             });
-        }
-    </script>
+            alert(msg);
+            document.location.href="/home";
+    }
+
+</script>
 
 </html>
